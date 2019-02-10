@@ -2,7 +2,7 @@
 
 ## Summary
 
-Having a transaction open for a long time does not affect over all replication delay. But it does consume a connection. So having many long running transactions will have you running low on connections. Eventually that might affect replication as well as the replica might not be able to connect.
+Having a transaction open for a long time does not seem to affect over all replication delay. But it does consume a connection. So having many long running transactions will have you running low on connections. Eventually that might affect replication as well as the replica might not be able to connect.
 
 ## Tests
 
@@ -104,7 +104,7 @@ You should (hopefully) not see any failures.
 
 #### Setup
 
-Modify [compose file](#add-pgbouncer) to include pgbouncer.
+Modify [compose file](#add-pgbouncer) to include pgbouncer. Change port `5432` in the insert scripts to `6432`.
 
 ```bash
 # terminal 1
@@ -197,9 +197,9 @@ Add replication user `replicate` with password `test` to primary
 ```bash
 $ docker exec -it primary-postgres /bin/bash
 /# psql -U postgres
-postgres # CREATE ROLE replicate WITH REPLICATION LOGIN ;
-postgres # set password_encryption = 'scram-sha-256';
-postgres # \password replicate
+postgres=# CREATE ROLE replicate WITH REPLICATION LOGIN ;
+postgres=# set password_encryption = 'scram-sha-256';
+postgres=# \password replicate
 ```
 
 In order for the replica to be able to work as a replica is has to be set up using a base backup from the master.
