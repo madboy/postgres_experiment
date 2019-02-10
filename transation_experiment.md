@@ -104,7 +104,7 @@ You should (hopefully) not see any failures.
 
 #### Setup
 
-Modify compose file to include pgbouncer.
+Modify [compose file](#add-pgbouncer) to include pgbouncer.
 
 ```bash
 # terminal 1
@@ -336,7 +336,7 @@ print("\n{} names inserted".format(end_count - start_count))
 
 ## Reading
 
-[primary article for setup](https://blog.raveland.org/post/postgresql_sr/)
-[secondary article for setup](https://lnxslck.wordpress.com/2018/10/06/postgres-and-docker-replication-with-hot-standby/)
-[docker image](https://github.com/GoogleCloudPlatform/postgresql-docker/tree/master/10)
-[pgbouncer setup](https://github.com/guedim/docker-postgres-pgbouncer)
+- [primary article for setup](https://blog.raveland.org/post/postgresql_sr/)
+- [secondary article for setup](https://lnxslck.wordpress.com/2018/10/06/postgres-and-docker-replication-with-hot-standby/)
+- [docker image](https://github.com/GoogleCloudPlatform/postgresql-docker/tree/master/10)
+- [pgbouncer setup](https://github.com/guedim/docker-postgres-pgbouncer)
