@@ -1,0 +1,33 @@
+version: '2'
+services:
+  primary:
+    container_name: primary-postgres
+    image: launcher.gcr.io/google/postgresql10
+    environment:
+      "POSTGRES_PASSWORD": "test"
+      "PGDATA": "/var/lib/postgresql/primary/data"
+    ports:
+      - '5432:5432'
+    volumes:
+      - /home/krl/primary/postgresql:/var/lib/postgresql/primary/data
+  replica:
+    container_name: replica-postgres
+    image: launcher.gcr.io/google/postgresql10
+    environment:
+      "POSTGRES_PASSWORD": "test"
+      "PGDATA": "/var/lib/postgresql/replica/data"
+    ports:
+      - '5433:5432'
+    volumes:
+      - /home/krl/replica/postgresql:/var/lib/postgresql/replica/data
+  pgbouncer:
+      image: brainsam/pgbouncer:1.7.2
+      environment:
+        DB_HOST: postgres
+        DB_USER: postgres           # define credentials
+        DB_PASSWORD: test       # define credentials
+        DB_port: 5432               # define database
+      links:
+        - primary:postgres
+      ports:
+        - 6432:6432 # PgBouncer port
